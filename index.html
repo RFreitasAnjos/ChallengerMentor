@@ -1,95 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Card Component</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  <title>Frontend Mentor | Profile card component</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap" rel="stylesheet">
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --dark-cyan: hsl(185, 75%, 39%);
-      --very-dark-desaturated-blue: hsl(229, 23%, 23%);
+      --very-dark-blue: hsl(229, 23%, 23%);
       --dark-grayish-blue: hsl(227, 10%, 46%);
-      --dark-gray: hsl(0, 0%, 59%)
+      --gray: hsl(0, 0%, 59%);
+      --card-bg: hsl(227, 47%, 96%);
     }
-    
-    body, html { margin: 0; padding: 0; font-family: 'Arial', sans-serif; color: hsl(228, 45%, 44%); }
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-    .bg_top { position: absolute; width: 100%; z-index: -1; top: 0; }
-    .bg_bottom { position: absolute; z-index: -1; width: 100%; bottom: 0; }
-    body{ background-color: var(--dark-cyan) }
-    .container {display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .card{ width: 350px; height: 400px; background-color: hsl(227, 47%, 96%); border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); display: flex; flex-direction: column; align-items: center; justify-content: space-between; overflow: hidden; }
-    .card_header { height: auto; width: auto;}
-    .card_body{ display: flex; flex-direction: column; justify-content: center; background-color:hsl(227, 47%, 96%) ; }
-    .card_image { width: 100%; display:flex; justify-content: center; margin-top: -60px; }
-    .card_image img { border-radius: 60px 60px; }
-    .card_content { display: flex; gap: 5px; justify-content: center; }
-    .card_content p { margin: 5px; }
-    p{font-size: 18px;}
-    b{ color: var(--very-dark-desaturated-blue) }
-    span { color: var(--dark-gray); font-weight: bold; }
-    .card_location {  }
-    .card_location p { margin: 5px; text-align: center; }
-    .card-footer{ background-color: aqua;}
-    .card_stats { display: flex; justify-content: space-between; width: 100%; }
-    .stat { flex-direction: row; text-align: center; box-shadow: 5px; margin: 5px; padding: 10px; border: 1px solid white; border-radius: 10px; }
-    .stat p { margin: 0; color: var(--dark-gray); font-weight: 400; }
-    .stat-text { color: var(--dark-grayish-blue); font-size: 14px; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Kumbh Sans', sans-serif;
+      background-color: var(--dark-cyan);
+      color: var(--very-dark-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bg-top,
+    .bg-bottom {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .bg-top {
+      top: -200px;
+      left: -200px;
+      width: 500px;
+    }
+
+    .bg-bottom {
+      bottom: -200px;
+      right: -200px;
+      width: 500px;
+    }
+
+    main.container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 350px;
+      background-color: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .card-header-img {
+      width: 100%;
+      height: auto;
+    }
+
+    .profile-image {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 5px solid var(--card-bg);
+      margin-top: -48px;
+    }
+
+    .user-info {
+      padding: 1rem 0;
+    }
+
+    .user-info h1 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .user-info span {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--gray);
+      margin-left: 8px;
+    }
+
+    .user-location {
+      color: var(--dark-grayish-blue);
+      font-size: 14px;
+      margin-top: 0.25rem;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: var(--gray);
+      margin: 1rem 0;
+      opacity: 0.3;
+    }
+
+    .card-stats {
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--dark-grayish-blue);
+    }
+
+    footer.attribution {
+      position: absolute;
+      bottom: 10px;
+      font-size: 11px;
+      text-align: center;
+      width: 100%;
+      color: #fff;
+    }
+
+    footer.attribution a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .bg-top {
+        width: 300px;
+        top: -150px;
+        left: -150px;
+      }
+
+      .bg-bottom {
+        width: 300px;
+        bottom: -150px;
+        right: -150px;
+      }
+
+      .card-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="bg_top">
-      <img src="./images/bg-pattern-top.svg" alt="bg_button">  
-    </div>
-    <div class="card">
-      <div class="card_body">
-        <div class="card_header">
-          <img src="./images/bg-pattern-card.svg" alt="Background Pattern" style="width: 100%; height: auto; border-radius: 10px 10px 0 0;">
-        </div>
-        <div class="card_image">
-          <img src="./images/image-victor.jpg" alt="Victor Crest">
-        </div>
-        <div>
-          <div class="card_content">
-            <p><b>Victor Crest</b></p>
-            <p><span>26</span></p>
-          </div>
-          <div class="card_location">
-            <p><span>London</span></p>
-          </div>
-        </div>
+
+  <div class="bg-top">
+    <img src="./images/bg-pattern-top.svg" alt="Top Background" />
+  </div>
+  <div class="bg-bottom">
+    <img src="./images/bg-pattern-bottom.svg" alt="Bottom Background" />
+  </div>
+
+  <main class="container">
+    <header>
+      <img src="./images/bg-pattern-card.svg" alt="Card Header" class="card-header-img" />
+    </header>
+    <section>
+      <img src="./images/image-victor.jpg" alt="Victor Crest" class="profile-image" />
+      <div class="user-info">
+        <h1>Victor Crest <span>26</span></h1>
+        <p class="user-location">London</p>
       </div>
-        <hr/>
-        <div class="card_footer">
-          <div class="card_stats">
-            <div class="stat">
-              <p><b>80K</b></p>
-              <p class="stat-text">Followers</p>
-            </div>
-            <div class="stat">
-              <p><b>803K</b></p>
-              <p class="stat-text">Likes</p>
-            </div>
-            <div class="stat">
-              <p><b>1.4K</b></p>
-              <p class="stat-text">Photos</p>
-            </div>
-          </div>
-        </div>
-    </div> 
-  </div>
-  <div class="bg_bottom">
-    <img src="./images/bg-pattern-bottom.svg" alt="bg_bottom">
-  </div>
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+    </section>
+    <div class="divider"></div>
+    <footer class="card-stats">
+      <div class="stat">
+        <strong>80K</strong>
+        <span>Followers</span>
+      </div>
+      <div class="stat">
+        <strong>803K</strong>
+        <span>Likes</span>
+      </div>
+      <div class="stat">
+        <strong>1.4K</strong>
+        <span>Photos</span>
+      </div>
+    </footer>
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="https://github.com/RFreitasAnjos">Renan Freitas</a>.
+  </footer>
+
 </body>
 </html>
